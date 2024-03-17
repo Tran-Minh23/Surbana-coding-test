@@ -1,0 +1,9 @@
+FROM postgres:16.2-alpine3.19
+
+# Variables needed at runtime to configure postgres and run the initdb scripts
+ENV POSTGRES_DB 'surbana'
+ENV POSTGRES_USER 'testuser'
+ENV POSTGRES_PASSWORD 'pass123'
+
+# Copy in the load-extensions script
+COPY load-extensions.sh /docker-entrypoint-initdb.d

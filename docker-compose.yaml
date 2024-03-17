@@ -1,0 +1,16 @@
+version: '3.8'
+
+name: surbana-coding
+
+services:
+  db:
+    build:
+      context: .
+      dockerfile: pg-Dockerfile
+    container_name: postgres-db
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_PASSWORD: pass123
+      POSTGRES_USER: testuser
+      POSTGRES_DB: surbana
