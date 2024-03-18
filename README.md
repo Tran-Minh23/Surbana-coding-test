@@ -15,6 +15,9 @@ I use port 5432 for my container as default. If that port is not available on yo
 Navigate to the root folder
 
 ```bash
+# run Postgres container
+$ docker compose up
+
 # install all the packages
 $ npm install
 
