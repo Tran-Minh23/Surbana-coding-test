@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import typeorm from './config/option/typeorm';
+import { LocationModule } from './location/location.module';
+import typeorm from './config/database/typeorm';
 
 @Module({
   imports: [
@@ -16,8 +16,8 @@ import typeorm from './config/option/typeorm';
       useFactory: async (configService: ConfigService) =>
         configService.get('typeorm'),
     }),
+    LocationModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}

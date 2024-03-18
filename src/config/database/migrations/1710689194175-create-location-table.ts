@@ -11,6 +11,7 @@ export class CreateLocationTable1710689194175 implements MigrationInterface {
             type: 'int',
             generationStrategy: 'increment',
             isPrimary: true,
+            isGenerated: true,
             isNullable: false,
           },
           {
