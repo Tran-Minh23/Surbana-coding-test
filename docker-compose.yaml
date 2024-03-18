@@ -3,19 +3,10 @@ version: '3.8'
 name: surbana-coding
 
 services:
-  # db:
-  #   build:
-  #     context: .
-  #     dockerfile: pg-Dockerfile
-  #   container_name: postgres-db
-  #   ports:
-  #     - '5432:5432'
-  #   environment:
-  #     POSTGRES_PASSWORD: pass123
-  #     POSTGRES_USER: testuser
-  #     POSTGRES_DB: surbana
   db:
-    image: harbor.logixtek.com/logix.technology/postgres@sha256:da23bcc0a34a86ee8877aa8c09e2bcc105422825533ca67418066b0a38e85d5e
+    build:
+      context: .
+      dockerfile: pg-Dockerfile
     container_name: postgres-db
     ports:
       - '5432:5432'
@@ -23,3 +14,10 @@ services:
       POSTGRES_PASSWORD: pass123
       POSTGRES_USER: testuser
       POSTGRES_DB: surbana
+  # application:
+  #   build:
+  #     context: .
+  #     dockerfile: nest_Dockerfile
+  #   container_name: application
+  #   ports:
+  #     - '3000:3000'

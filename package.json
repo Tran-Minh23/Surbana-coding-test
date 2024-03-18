@@ -21,7 +21,7 @@
     "typeorm": "typeorm",
     "typeorm-ts-node-commonjs": "npx typeorm-ts-node-commonjs",
     "migration:create": "npm run typeorm -- migration:create ./src/config/database/migrations/%npm_config_name%",
-    "migration:runts": "npm run typeorm-ts-node-commonjs migration:run -- -d ./src/config/option/typeorm.ts"
+    "migration:runts": "npm run typeorm-ts-node-commonjs migration:run -- -d ./src/config/database/typeorm.ts"
   },
   "dependencies": {
     "@nestjs/common": "^10.0.0",

@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty, Length } from 'class-validator';
+import { IsNotEmpty, IsNumberString, Length } from 'class-validator';
 
 export class CreateDto {
   @ApiProperty()
@@ -19,6 +19,7 @@ export class CreateDto {
 
   @ApiProperty()
   @IsNotEmpty()
+  @IsNumberString()
   area: number;
 
   @ApiProperty()

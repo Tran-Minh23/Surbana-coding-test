@@ -1,4 +1,4 @@
-FROM harbor.logixtek.com/logix.technology/node@sha256:25300baedcc0a745be24551f23871a20cfefd19998330c441c453d6a8467e511 AS builder
+FROM node:18-alpine3.18
 
 WORKDIR /app
 COPY package\*.json ./
@@ -9,13 +9,11 @@ RUN npm run build
 
 # Second stage
 
-FROM harbor.logixtek.com/logix.technology/node@sha256:25300baedcc0a745be24551f23871a20cfefd19998330c441c453d6a8467e511
+FROM node:18-alpine3.18
 WORKDIR /app
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/package.json .
 COPY --from=builder /app/node_modules ./node_modules
-
-CMD ["npm", "run", "migration:runts"]
 
 EXPOSE 3000
 CMD ["npm", "run", "start:prod"]

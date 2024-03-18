@@ -17,37 +17,47 @@ export class UpdateService {
   ) {}
 
   async create(createDto: CreateDto): Promise<ResponseTemplate<LocationRes>> {
-    let location = this.locationRepository.create();
+    try {
+      let location = this.locationRepository.create();
 
-    location = {
-      ...location,
-      ...createDto,
-    };
+      location = {
+        ...location,
+        ...createDto,
+      };
 
-    await this.locationRepository.insert(location);
+      await this.locationRepository.insert(location);
 
-    const response = new ResponseTemplate(201, 'Success', location);
-    return response;
+      const response = new ResponseTemplate(201, 'Success', location);
+      return response;
+    } catch (error) {
+      this.logger.error(error.message, error.stack);
+      throw error;
+    }
   }
 
   async update(updateDto: UpdateDto): Promise<ResponseTemplate<LocationRes>> {
-    let currentLocation = await this.locationRepository.findOne({
-      where: { id: updateDto.id },
-    });
+    try {
+      let currentLocation = await this.locationRepository.findOne({
+        where: { id: updateDto.id },
+      });
 
-    if (!currentLocation) {
-      throw new HttpException('Invalid location id', HttpStatus.BAD_REQUEST);
+      if (!currentLocation) {
+        throw new HttpException('Invalid location id', HttpStatus.BAD_REQUEST);
+      }
+
+      await this.locationRepository.update({ id: updateDto.id }, updateDto);
+
+      currentLocation = {
+        ...currentLocation,
+        ...updateDto,
+      };
+
+      const response = new ResponseTemplate(200, 'Success', currentLocation);
+      return response;
+    } catch (error) {
+      this.logger.error(error.message, error.stack);
+      throw error;
     }
-
-    await this.locationRepository.update({ id: updateDto.id }, updateDto);
-
-    currentLocation = {
-      ...currentLocation,
-      ...updateDto,
-    };
-
-    const response = new ResponseTemplate(200, 'Success', currentLocation);
-    return response;
   }
 
   async delete(id: number): Promise<ResponseTemplate<string>> {

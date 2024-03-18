@@ -9,7 +9,7 @@ async function bootstrap() {
     logger: ['error', 'warn'],
   });
 
-  app.useGlobalPipes(new ValidationPipe());
+  app.useGlobalPipes(new ValidationPipe({ stopAtFirstError: true }));
   app.useGlobalFilters(new HttpExceptionFilter());
 
   const config = new DocumentBuilder()
